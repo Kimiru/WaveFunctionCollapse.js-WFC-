@@ -1,0 +1,26 @@
+{
+    "name": "wavefunctioncollapse.js",
+    "version": "1.0.0",
+    "description": "",
+    "main": "",
+    "type": "commonjs",
+    "scripts": {
+        "build": "tsc --project ./tsconfig-esnext.json && tsc --project ./tsconfig-commonjs.json",
+        "build-esnext": "tsc --project ./tsconfig-esnext.json",
+        "build-commonjs": "tsc --project ./tsconfig-commonjs.json",
+        "clean": "rm -r js/* && rm -r commonjs/*",
+        "build-test": "npm run build-commonjs && npm test",
+        "test": "mocha tests/index.test.js",
+        "rail": "cd example/railroad && node railroad.js"
+    },
+    "author": "Kimiru_Laeli",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^17.0.15"
+    },
+    "dependencies": {
+        "canvas": "^2.9.1",
+        "mocha": "^9.2.2",
+        "typescript": "^4.6.2"
+    }
+}

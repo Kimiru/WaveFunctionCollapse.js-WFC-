@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES2021",
+        "module": "CommonJS",
+        "rootDir": "./ts",
+        "outDir": "./commonjs",
+        "lib": [
+            "ES2021"
+        ]
+    },
+    "include": [
+        "ts/**/*"
+    ]
+}
