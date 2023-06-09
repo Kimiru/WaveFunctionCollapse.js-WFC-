@@ -118,6 +118,57 @@ export var WFC;
         return areConnectionMatching(connectionA.connection, connectionB.connection);
     }
     WFC.areConnectionsCompatible = areConnectionsCompatible;
+    /**
+    * Rotate the rule steps times in the trigonometric direction on the given axis
+    */
+    function rotateRule(rule, side, steps = 1, newid) {
+        if ([Block.Side.DOWN, Block.Side.UP].includes(side)) {
+            let ring = [Block.Side.LEFT, Block.Side.FRONT, Block.Side.RIGHT, Block.Side.BACK];
+            return {
+                id: newid ?? rule.id,
+                connectors: rule.connectors.map(connector => {
+                    let index = ring.indexOf(connector.side);
+                    let newSide;
+                    if (index === -1)
+                        newSide = connector.side;
+                    else
+                        newSide = ring[(index + steps) % 4];
+                    return { side: newSide, connection: [...connector.connection] };
+                })
+            };
+        }
+        else if ([Block.Side.LEFT, Block.Side.RIGHT].includes(side)) {
+            let ring = [Block.Side.UP, Block.Side.FRONT, Block.Side.DOWN, Block.Side.BACK];
+            return {
+                id: newid ?? rule.id,
+                connectors: rule.connectors.map(connector => {
+                    let index = ring.indexOf(connector.side);
+                    let newSide;
+                    if (index === -1)
+                        newSide = connector.side;
+                    else
+                        newSide = ring[(index + steps) % 4];
+                    return { side: newSide, connection: [...connector.connection] };
+                })
+            };
+        }
+        else {
+            let ring = [Block.Side.UP, Block.Side.LEFT, Block.Side.DOWN, Block.Side.RIGHT];
+            return {
+                id: newid ?? rule.id,
+                connectors: rule.connectors.map(connector => {
+                    let index = ring.indexOf(connector.side);
+                    let newSide;
+                    if (index === -1)
+                        newSide = connector.side;
+                    else
+                        newSide = ring[(index + steps) % 4];
+                    return { side: newSide, connection: [...connector.connection] };
+                })
+            };
+        }
+    }
+    WFC.rotateRule = rotateRule;
     class Solution extends Block {
         wfc;
         constructor(args, wfc) {

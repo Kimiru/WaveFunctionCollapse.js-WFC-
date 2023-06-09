@@ -36,6 +36,10 @@ export declare namespace WFC {
         id: number;
         connectors: Connector[];
     }
+    /**
+    * Rotate the rule steps times in the trigonometric direction on the given axis
+    */
+    function rotateRule(rule: Rule, side: Block.Side, steps?: number, newid?: number): Rule;
     interface Cell {
         options: number[];
         solved: boolean;
